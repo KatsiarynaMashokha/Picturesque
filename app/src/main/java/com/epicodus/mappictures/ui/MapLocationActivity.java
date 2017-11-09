@@ -127,6 +127,7 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
         });
     }
 
+    // In order to connect
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)

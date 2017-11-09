@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_favorite_border_black_36dp"/>
         <ImageButton
+            android:id="@+id/download_image_view"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
