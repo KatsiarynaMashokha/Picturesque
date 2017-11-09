@@ -2,15 +2,52 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#CFD8DC"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.epicodus.mappictures.ui.DetailPictureActivity">
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:layout_alignParentTop="true"
+        android:layout_margin="24dp"
+        tools:text="Title"
+        android:textSize="32sp"
+        android:textColor="#4527A0"
+        android:textStyle="bold"/>
 
     <ImageView
         android:layout_margin="8dp"
         android:id="@+id/detail_image_view"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:layout_centerInParent="true"
         android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_below="@+id/detail_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_favorite_border_black_36dp"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_file_download_black_36dp"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_info_outline_black_36dp"/>
+    </LinearLayout>
 
 </RelativeLayout>

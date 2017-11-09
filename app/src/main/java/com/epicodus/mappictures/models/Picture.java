@@ -8,12 +8,14 @@ import org.parceler.Parcel;
 @Parcel
 public class Picture {
     public String url;
+    public String title;
 
     public Picture() {
     }
 
-    public Picture(String url) {
+    public Picture(String url, String title) {
         this.url = url;
+        this.title = title;
     }
 
     public String getUrl() {
@@ -22,5 +24,13 @@ public class Picture {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

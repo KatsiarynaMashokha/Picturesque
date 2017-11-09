@@ -42,7 +42,8 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private Marker mCurrLocationMarker;
-    private Button picturesButton;
+    private Button mPicturesButton;
+    private Button mFollowLocationButton;
     private String markerLat;
     private String markerLon;
 
@@ -54,8 +55,20 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
         getSupportActionBar().setTitle("Drop a pin");
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
-        picturesButton = (Button) findViewById(R.id.pictures_button);
-        picturesButton.setOnClickListener(new View.OnClickListener() {
+        mPicturesButton = (Button) findViewById(R.id.pictures_button);
+        mFollowLocationButton = (Button) findViewById(R.id.save_location_button);
+        mFollowLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (markerLat == null || markerLon == null) {
+                    Toast.makeText(getApplicationContext(), "Select a location", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Location added!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });;
+
+        mPicturesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MapLocationActivity.this, PicturesActivity.class);

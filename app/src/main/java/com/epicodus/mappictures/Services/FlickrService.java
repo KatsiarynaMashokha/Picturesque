@@ -51,13 +51,13 @@ public class FlickrService {
             JSONArray photoArray = photosObject.getJSONArray("photo");
             for (int i = 0; i < photoArray.length(); i++) {
                 JSONObject currentPhoto = photoArray.getJSONObject(i);
-                String id = currentPhoto.getString("id");
+                String title = currentPhoto.getString("title");
                 if(!currentPhoto.has("url_s")) {
                     continue;
                 }
 
                 String url = currentPhoto.getString("url_s");
-                    Picture picture = new Picture(url);
+                    Picture picture = new Picture(url, title);
                     pictures.add(picture);
             }
         } catch (IOException e) {
