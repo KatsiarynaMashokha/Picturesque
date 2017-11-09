@@ -13,7 +13,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="520dp"
-        tools:context=".MapLocationActivity"/>
+        tools:context=".ui.MapLocationActivity"/>
 
     <Button
         android:id="@+id/pictures_button"

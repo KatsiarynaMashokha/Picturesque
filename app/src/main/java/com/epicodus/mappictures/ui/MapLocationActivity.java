@@ -1,7 +1,8 @@
-package com.epicodus.mappictures;
+package com.epicodus.mappictures.ui;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.epicodus.mappictures.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -33,14 +35,16 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+    private static final String TAG = MapLocationActivity.class.getSimpleName();
     private GoogleMap mGoogleMap;
     private SupportMapFragment mapFrag;
     private LocationRequest mLocationRequest;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private Marker mCurrLocationMarker;
-    private LatLng markerLatLng;
     private Button picturesButton;
+    private String markerLat;
+    private String markerLon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,10 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
         picturesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MapLocationActivity.this, "Coord are: lat " + markerLatLng, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MapLocationActivity.this, PicturesActivity.class);
+                intent.putExtra("LAT", markerLat);
+                intent.putExtra("LON", markerLon);
+                startActivity(intent);
             }
         });
     }
@@ -95,7 +102,9 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
             @Override
             public void onMapClick(LatLng latLng) {
                 mGoogleMap.clear();
-                markerLatLng = new LatLng(latLng.latitude, latLng.longitude);
+                markerLat = String.valueOf(latLng.latitude);
+                markerLon = String.valueOf(latLng.longitude);
+                LatLng markerLatLng = new LatLng(latLng.latitude, latLng.longitude);
                 MarkerOptions marker = new MarkerOptions()
                         .position(markerLatLng)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
