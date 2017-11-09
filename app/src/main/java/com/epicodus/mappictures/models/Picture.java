@@ -1,11 +1,16 @@
 package com.epicodus.mappictures.models;
 
+import org.parceler.Parcel;
+
 /**
  * Created by katsiarynamashokha on 11/8/17.
  */
-
+@Parcel
 public class Picture {
-    private String url;
+    public String url;
+
+    public Picture() {
+    }
 
     public Picture(String url) {
         this.url = url;

@@ -2,11 +2,13 @@ package com.epicodus.mappictures.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.epicodus.mappictures.R;
 import com.epicodus.mappictures.Services.FlickrService;
+import com.epicodus.mappictures.adapters.PicturesListAdapter;
 import com.epicodus.mappictures.models.Picture;
 
 import java.io.IOException;
@@ -18,7 +20,9 @@ import okhttp3.Response;
 
 public class PicturesActivity extends AppCompatActivity {
     private ArrayList<Picture> mPictures;
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
+    private TextView mNoResultsTextView;
+    private PicturesListAdapter mAdapter;
     private static final String TAG = PicturesActivity.class.getSimpleName();
     private String lat;
     private String lon;
@@ -28,7 +32,8 @@ public class PicturesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pictures_activity);
 
-        mListView = (ListView) findViewById(R.id.listView);
+        mRecyclerView = (RecyclerView) findViewById(R.id.listView);
+        mNoResultsTextView = (TextView) findViewById(R.id.no_results_text);
         lat = getIntent().getStringExtra("LAT");
         lon = getIntent().getStringExtra("LON");
         getPictures();
@@ -39,7 +44,6 @@ public class PicturesActivity extends AppCompatActivity {
         flickrService.findPictures(lat, lon, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
             }
 
             @Override
@@ -49,14 +53,15 @@ public class PicturesActivity extends AppCompatActivity {
                 PicturesActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String[] picrls = new String[mPictures.size()];
-                        for (int i = 0; i < picrls.length; i++) {
-                            picrls[i] = mPictures.get(i).getUrl();
+                        mAdapter = new PicturesListAdapter(mPictures, getApplicationContext());
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager =
+                                new GridLayoutManager(PicturesActivity.this, 2);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        if(mPictures.size() == 0) {
+                            mNoResultsTextView.setText("No pictures found for this location");
+                            mNoResultsTextView.setTextSize(20f);
                         }
-                        ArrayAdapter adapter = new ArrayAdapter(PicturesActivity.this,
-                                android.R.layout.simple_list_item_1, picrls);
-                        mListView.setAdapter(adapter);
-
                     }
                 });
             }

@@ -51,7 +51,7 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_location);
 
-        getSupportActionBar().setTitle("Select the location");
+        getSupportActionBar().setTitle("Drop a pin");
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
         picturesButton = (Button) findViewById(R.id.pictures_button);
@@ -208,7 +208,6 @@ public class MapLocationActivity extends AppCompatActivity  implements OnMapRead
                     }
 
                 } else {
-
                     // permission denied. Disable the
                     // functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
